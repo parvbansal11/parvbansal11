@@ -41,7 +41,7 @@
 
 - 💬 Ask me about: AI/ML, hackathons, fintech ops, DTU life, growth mindset
 - ⚡ Fun fact: I turned JEE stress into fuel — now I code at 3 AM by choice 😄
-- 📧 Reach me: [LinkedIn](https://www.linkedin.com/in/parvv) | parvbansal.[your domain] or DMs open
+- 📧 Reach me: [LinkedIn](https://www.linkedin.com/in/parvv)
 
 <div align="center">
   <img src="https://visitor-badge.laobi.icu/badge?page_id=parvbansal.parvbansal" alt="Profile views"/>
