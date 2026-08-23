@@ -232,20 +232,6 @@ $ cat research.md
 
 <div align="center">
 
-## `~/` how this page is built
-
-<sub>
-
-Nothing here is fetched from a shared card service at read time. The portrait is a dot matrix
-rendered from a photo by `scripts/dotify.py`; the radars, the stat card and every project card
-are drawn by `scripts/radar.py` and `scripts/cards.py` and committed as static SVG. A workflow
-redraws them every six hours, so the numbers stay live and the page never breaks because
-someone else's server went down.
-
-`scripts/` · `assets/projects.json` · `.github/workflows/`
-
-</sub>
-
 <br>
 
 <sub>`01100010 01110101 01101001 01101100 01100100 00100000 01110100 01101000 01100101 00100000 01101000 01100001 01110010 01100100 00100000 01110000 01100001 01110010 01110100`</sub>
