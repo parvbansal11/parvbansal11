@@ -1,6 +1,6 @@
 <div align="center">
 
-<!-- PORTRAIT — dot matrix, colour, transparent background, so one file serves
+<!-- PORTRAIT - dot matrix, colour, transparent background, so one file serves
      both themes. The dots sweep in on a diagonal via CSS keyframes. Vision mattes
      the person; scripts/matte.py adds back the laptop it will not call foreground:
        swift scripts/cutout.swift assets/source.jpg assets/me.png
@@ -12,7 +12,7 @@
 
 <br>
 
-<!-- NAME / TAGLINE — animated typing -->
+<!-- NAME / TAGLINE - animated typing -->
 <a href="https://parvbansal.vercel.app">
   <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=26&duration=2800&pause=900&color=2DD4A7&center=true&vCenter=true&width=620&lines=Parv+Bansal;Mathematics+%26+Computing+%40+DTU;LLM+systems%2C+retrieval%2C+safety+research;I+ship+things+that+run+without+the+cloud" alt="typing banner">
 </a>
@@ -43,10 +43,8 @@ I'm **Parv Bansal**, reading Mathematics and Computing at **Delhi Technological 
 I build machine-learning systems that hold up when you look closely at them: retrieval you can
 trace, models you can interrogate, and results that survive being measured a second time.
 
-- Currently building in **fraud detection** and **investing** — risk models, identity
+- Currently building in **fraud detection** and **investing** - risk models, identity
   signals, and the plumbing that has to hold up underneath them
-- Also building **[legal-gemma](https://github.com/parvbansal11/legal-gemma)** — a legal
-  assistant for Indian citizens that runs entirely on your own machine
 - Researching **multi-turn jailbreak robustness** and what quantization actually does to it
   → **[refusal-quant-multiturn](https://github.com/parvbansal11/refusal-quant-multiturn)**
 - Into **local-first AI**: if it needs an API key to demo, I'm less interested
@@ -72,7 +70,7 @@ trace, models you can interrogate, and results that survive being measured a sec
 <tr>
 <td width="50%" align="center" valign="middle">
 
-<!-- Self-rated — edit assets/skills.json, the workflow redraws it -->
+<!-- Self-rated - edit assets/skills.json, the workflow redraws it -->
 <picture>
   <source media="(prefers-color-scheme: dark)"  srcset="assets/radar-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/radar-light.svg">
@@ -82,7 +80,7 @@ trace, models you can interrogate, and results that survive being measured a sec
 </td>
 <td width="50%" align="center" valign="middle">
 
-<!-- Measured — real language byte counts across every public repo -->
+<!-- Measured - real language byte counts across every public repo -->
 <picture>
   <source media="(prefers-color-scheme: dark)"  srcset="assets/radar-langs-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="assets/radar-langs-light.svg">
@@ -108,7 +106,7 @@ trace, models you can interrogate, and results that survive being measured a sec
 
 <br><br>
 
-<!-- Snake eats the contribution graph — .github/workflows/snake.yml -->
+<!-- Snake eats the contribution graph - .github/workflows/snake.yml -->
 <picture>
   <source media="(prefers-color-scheme: dark)"  srcset="https://raw.githubusercontent.com/parvbansal11/parvbansal11/output/snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/parvbansal11/parvbansal11/output/snake.svg">
