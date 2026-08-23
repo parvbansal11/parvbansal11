@@ -15,8 +15,15 @@ import numpy as np
 from PIL import Image, ImageOps
 
 
-def load(path, crop):
+def load(path, crop, trim=True):
     img = Image.open(path).convert("RGBA")
+    if trim:
+        # Cut away the fully transparent margin the matting step leaves behind,
+        # otherwise the grid spends most of its columns on empty space.
+        alpha = img.getchannel("A").point(lambda v: 255 if v > 24 else 0)
+        box = alpha.getbbox()
+        if box:
+            img = img.crop(box)
     if crop:
         x0, y0, x1, y1 = crop
         w, h = img.size
@@ -47,7 +54,8 @@ def equalize(values, mask):
     return out
 
 
-def build(img, cols, cell_aspect, detail, gamma, do_equalize, alpha_floor, bands):
+def build(img, cols, cell_aspect, detail, gamma, do_equalize, alpha_floor, bands,
+          saturation=1.35, gain=1.12, lift=0.06):
     grid, rows = sample(img, cols, cell_aspect)
     rgb, alpha = grid[..., :3], grid[..., 3]
     visible = alpha > alpha_floor
@@ -64,8 +72,11 @@ def build(img, cols, cell_aspect, detail, gamma, do_equalize, alpha_floor, bands
     weight = detail + (1.0 - detail) * weight
     radius = 0.5 * np.sqrt(np.clip(weight, 0.0, 1.0)) * np.clip(alpha / 0.85, 0, 1)
 
-    # Lift very dark samples so they still read against a dark page.
-    colour = np.clip(rgb * 0.86 + 0.14, 0, 1)
+    # Lift and saturate: a face in soft shade reads as grey mud once it is only
+    # a few hundred pixels of dots on a dark page.
+    grey = luminance(rgb)[..., None]
+    colour = grey + (rgb - grey) * saturation
+    colour = np.clip(colour * gain + lift, 0, 1)
     return radius, colour, alpha, visible, rows
 
 
@@ -137,16 +148,22 @@ def main():
     ap.add_argument("--gamma", type=float, default=1.15)
     ap.add_argument("--equalize", action="store_true")
     ap.add_argument("--alpha-floor", type=float, default=0.35)
+    ap.add_argument("--saturation", type=float, default=1.35)
+    ap.add_argument("--gain", type=float, default=1.12)
+    ap.add_argument("--lift", type=float, default=0.06)
     ap.add_argument("--bands", type=int, default=22)
     ap.add_argument("--sweep", action="store_true",
                     help="staggered reveal; blank in first-frame-only renderers")
-    ap.add_argument("--crop", type=parse_crop, default=None)
+    ap.add_argument("--crop", type=parse_crop, default=None,
+                    help="x0,y0,x1,y1 as fractions, applied after the alpha trim")
+    ap.add_argument("--no-trim", action="store_true")
     args = ap.parse_args()
 
-    img = load(args.image, args.crop)
+    img = load(args.image, args.crop, trim=not args.no_trim)
     radius, colour, alpha, visible, rows = build(
         img, args.cols, args.aspect, args.detail, args.gamma,
         args.equalize, args.alpha_floor, args.bands,
+        args.saturation, args.gain, args.lift,
     )
     svg = to_svg(radius, colour, alpha, visible, rows, args.cols,
                  args.aspect, args.bands, args.sweep)

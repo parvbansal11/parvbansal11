@@ -45,7 +45,8 @@ fails without it.
 
 # the portrait, from a photo
 swift scripts/cutout.swift assets/source.jpg assets/me.png
-.venv/bin/python scripts/dotify.py assets/me.png -o assets/portrait --cols 104 --equalize
+.venv/bin/python scripts/dotify.py assets/me.png -o assets/portrait --cols 104 \
+  --crop 0.26,0.0,0.76,0.62 --detail 0.18 --gamma 0.95 --gain 1.2 --lift 0.08
 ```
 
 Open `preview.html` over a local server to check every asset in both themes:
