@@ -1,0 +1,25 @@
+<!doctype html><meta charset="utf-8"><title>asset preview</title>
+<style>
+ body{background:#0d1117;color:#e6edf3;font:13px ui-monospace,monospace;margin:0;padding:24px}
+ body.light{background:#fff;color:#1f2328}
+ h2{font-size:12px;color:#8b949e;font-weight:400;margin:26px 0 10px;letter-spacing:.08em;text-transform:uppercase}
+ .row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+ img{display:block}
+ button{position:fixed;top:12px;right:12px;background:#2dd4a7;border:0;padding:8px 14px;border-radius:8px;font:inherit;cursor:pointer}
+</style>
+<button onclick="document.body.classList.toggle('light');swap()">toggle theme</button>
+<h2>stats</h2><div class="row" id="stats"></div>
+<h2>radars</h2><div class="row" id="radars"></div>
+<h2>project cards</h2><div class="row" id="cards"></div>
+<h2>portrait</h2><div class="row" id="portrait"></div>
+<script>
+const projects=["legal-gemma","RF-Gemma","100csv","hamming-twin","EcoAuditAPP","dtu-nsut-insider"];
+function swap(){
+ const t=document.body.classList.contains('light')?'light':'dark';
+ stats.innerHTML=`<img src="assets/card-stats-${t}.svg">`;
+ radars.innerHTML=`<img src="assets/radar-${t}.svg" width="380"><img src="assets/radar-langs-${t}.svg" width="380">`;
+ cards.innerHTML=projects.map(p=>`<img src="assets/card-${p}-${t}.svg">`).join('');
+ portrait.innerHTML=`<img src="assets/portrait.svg" width="320" onerror="this.replaceWith('(not generated yet)')">`;
+}
+swap();
+</script>

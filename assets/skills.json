@@ -1,0 +1,12 @@
+{
+  "axes": [
+    {"label": "ML / DL", "value": 0.92},
+    {"label": "LLM systems", "value": 0.95},
+    {"label": "Retrieval", "value": 0.88},
+    {"label": "Research", "value": 0.85},
+    {"label": "Backend", "value": 0.74},
+    {"label": "Frontend", "value": 0.70},
+    {"label": "Data / SQL", "value": 0.80},
+    {"label": "Math", "value": 0.90}
+  ]
+}

@@ -1,0 +1,44 @@
+[
+  {
+    "repo": "legal-gemma",
+    "name": "legal-gemma  ·  HaqSetu",
+    "blurb": "Legal navigation for Indian citizens that never leaves your machine. Hybrid retrieval over a 2,981-span statute corpus, IPC to BNS mapping, multimodal Gemma 4. No cloud, no API key.",
+    "tags": ["Next.js", "Gemma 4", "BM25+bge-m3", "on-device"],
+    "language": "TypeScript"
+  },
+  {
+    "repo": "RF-Gemma",
+    "name": "RF-Gemma",
+    "blurb": "Camera-free body sensing from WiFi CSI, reasoned over by Gemma 4: physics it can cite, alerts it can justify. Real MM-Fi data, live 3D replay dashboard.",
+    "tags": ["PyTorch", "MM-Fi", "CSI", "3D replay"],
+    "language": "Python"
+  },
+  {
+    "repo": "100csv",
+    "name": "100csv",
+    "blurb": "Ranks 100 candidates out of 100,000 offline on CPU in under five minutes. BM25 + dense retrieval fused by RRF, cross-encoder rerank, Isolation Forest integrity gate. No LLM in the decision.",
+    "tags": ["retrieval", "rerank", "FAISS", "offline"],
+    "language": "Python"
+  },
+  {
+    "repo": "hamming-twin",
+    "name": "hamming-twin",
+    "blurb": "A digital twin of Richard Hamming. Answers in his voice, grounded in his own papers and talks, and remembers what you tell it within and across conversations.",
+    "tags": ["agents", "RAG", "memory"],
+    "language": "Python"
+  },
+  {
+    "repo": "EcoAuditAPP",
+    "name": "EcoAudit",
+    "blurb": "Audit-grade ESG evidence on mobile. Append-only audit log, SHA-256 on every blob, server-side geofenced proof of presence, row-level security by institution.",
+    "tags": ["Expo", "Supabase", "RLS", "BRSR"],
+    "language": "TypeScript"
+  },
+  {
+    "repo": "dtu-nsut-insider",
+    "name": "dtu-nsut-insider",
+    "blurb": "Everything they don't tell you about DTU & NSUT: JAC counselling, branch predictor, placements, insider opportunities and real student experiences. Trusted by 25K+ students.",
+    "tags": ["Next.js", "TypeScript", "25K+ users"],
+    "language": "TypeScript"
+  }
+]
