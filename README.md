@@ -1,11 +1,14 @@
 <div align="center">
 
 <!-- PORTRAIT — dot matrix, colour, transparent background, so one file serves
-     both themes. Subject cut out with the system Vision matting model, then:
+     both themes. The dots sweep in on a diagonal via CSS keyframes. Vision mattes
+     the person; scripts/matte.py adds back the laptop it will not call foreground:
        swift scripts/cutout.swift assets/source.jpg assets/me.png
-       python scripts/dotify.py assets/me.png -o assets/portrait --cols 104 \
-         --crop 0.26,0.0,0.76,0.62 --detail 0.18 --gamma 0.95 --gain 1.2 --lift 0.08 -->
-<img src="assets/portrait.svg" width="300" alt="Parv Bansal, rendered as a dot matrix">
+       python scripts/matte.py assets/source.jpg assets/me.png -o assets/me-full.png \
+         --keep-right-of 1185,0,1052,940 --drop-above 1435,0,1660,110 --drop-bright
+       python scripts/dotify.py assets/me-full.png -o assets/portrait --cols 140 \
+         --sweep --crop 0,0,0.82,1.0 --detail 0.16 --gamma 0.95 --gain 1.18 --lift 0.07 -->
+<img src="assets/portrait.svg" width="520" alt="Parv Bansal at a laptop, rendered as a dot matrix">
 
 <br>
 
@@ -40,7 +43,9 @@ I'm **Parv Bansal**, reading Mathematics and Computing at **Delhi Technological 
 I build machine-learning systems that hold up when you look closely at them: retrieval you can
 trace, models you can interrogate, and results that survive being measured a second time.
 
-- Currently building **[legal-gemma](https://github.com/parvbansal11/legal-gemma)** — a legal
+- Currently building in **fraud detection** and **investing** — risk models, identity
+  signals, and the plumbing that has to hold up underneath them
+- Also building **[legal-gemma](https://github.com/parvbansal11/legal-gemma)** — a legal
   assistant for Indian citizens that runs entirely on your own machine
 - Researching **multi-turn jailbreak robustness** and what quantization actually does to it
   → **[refusal-quant-multiturn](https://github.com/parvbansal11/refusal-quant-multiturn)**

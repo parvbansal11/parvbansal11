@@ -43,10 +43,12 @@ fails without it.
 # both radars (reads assets/skills.json and assets/languages.json)
 .venv/bin/python scripts/radar.py
 
-# the portrait, from a photo
+# the portrait, from a photo — three steps
 swift scripts/cutout.swift assets/source.jpg assets/me.png
-.venv/bin/python scripts/dotify.py assets/me.png -o assets/portrait --cols 104 \
-  --crop 0.26,0.0,0.76,0.62 --detail 0.18 --gamma 0.95 --gain 1.2 --lift 0.08
+.venv/bin/python scripts/matte.py assets/source.jpg assets/me.png -o assets/me-full.png \
+  --keep-right-of 1185,0,1052,940 --drop-above 1435,0,1660,110 --drop-bright
+.venv/bin/python scripts/dotify.py assets/me-full.png -o assets/portrait --cols 140 \
+  --sweep --crop 0,0,0.82,1.0 --detail 0.16 --gamma 0.95 --gain 1.18 --lift 0.07
 ```
 
 Open `preview.html` over a local server to check every asset in both themes:
@@ -70,9 +72,16 @@ schedule.
 
 ## A note on animation
 
-The radars and the portrait are drawn as still SVG on purpose. Both CSS
-keyframes and SMIL are ignored by renderers that show only the first frame of an
-image, and a reveal animation that starts at `opacity: 0` renders there as an
-empty box. `radar.py --animate` and `dotify.py --sweep` turn the reveal on if you
-decide the tradeoff is worth it. The typing banner and the snake animate through
-their own services and are unaffected.
+The portrait sweeps in on a diagonal using CSS keyframes inside the SVG, which is
+the same mechanism the contribution snake uses and plays fine in GitHub's `<img>`
+rendering. The cost is that a renderer showing only the first frame — some link
+previews and social cards — sees an empty box, because the animation starts at
+`opacity: 0`. Drop `--sweep` from the `dotify.py` command to render it still.
+
+The radars are deliberately still. Nothing is gained by animating them and the
+same first-frame caveat would apply; `radar.py --animate` turns a fade on.
+
+The two coordinate lines in the `matte.py` command are measured off this specific
+photo — the laptop's left edge and the top edge of its lid. A different photo
+needs them re-measured. The quickest way is to crop the region and overlay a
+coordinate grid, then read the corners off it.

@@ -4,9 +4,9 @@
     {"label": "LLM systems", "value": 0.95},
     {"label": "Retrieval", "value": 0.88},
     {"label": "Research", "value": 0.85},
-    {"label": "Backend", "value": 0.74},
-    {"label": "Frontend", "value": 0.70},
-    {"label": "Data / SQL", "value": 0.80},
+    {"label": "Risk / fraud", "value": 0.80},
+    {"label": "Backend", "value": 0.68},
+    {"label": "Frontend", "value": 0.42},
     {"label": "Math", "value": 0.90}
   ]
 }

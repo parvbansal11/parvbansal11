@@ -90,40 +90,51 @@ def to_svg(radius, colour, alpha, visible, rows, cols, cell_aspect, bands, sweep
         "<title>portrait</title>",
     ]
 
-    per_band = max(1, math.ceil(rows / bands))
-    for band in range(bands):
-        y0, y1 = band * per_band, min(rows, (band + 1) * per_band)
-        if y0 >= y1:
-            continue
-        chunk = []
-        for y in range(y0, y1):
-            cy = (y + 0.5) * step * cell_aspect
-            for x in range(cols):
-                if not visible[y, x]:
-                    continue
-                r = radius[y, x] * step
-                if r < 0.55:
-                    continue
-                cx = (x + 0.5) * step
-                r8, g8, b8 = (colour[y, x] * 255).astype(int)
-                op = min(1.0, float(alpha[y, x]) * 1.15)
-                chunk.append(
-                    f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.2f}" '
-                    f'fill="#{r8:02x}{g8:02x}{b8:02x}"'
-                    + (f' opacity="{op:.2f}"' if op < 0.98 else "")
-                    + "/>"
-                )
+    if sweep:
+        # CSS keyframes, which is what the contribution-snake SVG uses and what
+        # GitHub's own <img> rendering plays. The dots sweep in on a diagonal, so
+        # the picture materialises from the top left rather than unrolling.
+        parts.append(
+            "<style>"
+            ".d{animation:rise .62s cubic-bezier(.2,.8,.3,1) both}"
+            "@keyframes rise{from{opacity:0;transform:translate(-6px,10px)}"
+            "to{opacity:1;transform:none}}"
+            "</style>"
+        )
+        for i in range(bands):
+            parts.append(f'<style>.d{i}{{animation-delay:{0.055 * i:.2f}s}}</style>')
+
+    grouped = [[] for _ in range(bands)]
+    for y in range(rows):
+        cy = (y + 0.5) * step * cell_aspect
+        for x in range(cols):
+            if not visible[y, x]:
+                continue
+            r = radius[y, x] * step
+            if r < 0.55:
+                continue
+            cx = (x + 0.5) * step
+            r8, g8, b8 = (colour[y, x] * 255).astype(int)
+            op = min(1.0, float(alpha[y, x]) * 1.15)
+            circle = (
+                f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r:.2f}" '
+                f'fill="#{r8:02x}{g8:02x}{b8:02x}"'
+                + (f' opacity="{op:.2f}"' if op < 0.98 else "")
+                + "/>"
+            )
+            if sweep:
+                # diagonal wipe: distance along (x + y), normalised
+                t = (x / max(1, cols - 1) * 0.72) + (y / max(1, rows - 1) * 0.28)
+                band = min(bands - 1, int(t * bands))
+            else:
+                band = min(bands - 1, y * bands // max(1, rows))
+            grouped[band].append(circle)
+
+    for band, chunk in enumerate(grouped):
         if not chunk:
             continue
-        if sweep:
-            # SMIL, so it also plays inside an <img> on GitHub.
-            reveal = (
-                f'<animate attributeName="opacity" values="0;1" dur="0.45s" '
-                f'begin="{0.045 * band:.2f}s" fill="freeze"/>'
-            )
-            parts.append(f'<g opacity="0">{reveal}' + "".join(chunk) + "</g>")
-        else:
-            parts.append("<g>" + "".join(chunk) + "</g>")
+        cls = f' class="d d{band}"' if sweep else ""
+        parts.append(f"<g{cls}>" + "".join(chunk) + "</g>")
 
     parts.append("</svg>")
     return "".join(parts)
@@ -151,7 +162,7 @@ def main():
     ap.add_argument("--saturation", type=float, default=1.35)
     ap.add_argument("--gain", type=float, default=1.12)
     ap.add_argument("--lift", type=float, default=0.06)
-    ap.add_argument("--bands", type=int, default=22)
+    ap.add_argument("--bands", type=int, default=26)
     ap.add_argument("--sweep", action="store_true",
                     help="staggered reveal; blank in first-frame-only renderers")
     ap.add_argument("--crop", type=parse_crop, default=None,
