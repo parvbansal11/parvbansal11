@@ -1,13 +1,14 @@
 {
-  "TypeScript": 792570,
-  "Python": 709526,
+  "Python": 2422119,
+  "TypeScript": 2398211,
   "Jupyter Notebook": 652769,
+  "CSS": 355910,
+  "JavaScript": 247035,
   "TeX": 161782,
-  "JavaScript": 147345,
-  "HTML": 145739,
-  "CSS": 86803,
-  "Shell": 25012,
+  "HTML": 146727,
+  "Shell": 89505,
   "PLpgSQL": 11440,
+  "Dockerfile": 3376,
   "Swift": 3350,
   "Makefile": 955
 }
